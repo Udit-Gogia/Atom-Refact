@@ -5,7 +5,6 @@ export function validateRes(response , result ){
     const {status} = response;
 
     if(status === 200){
-        setToken(result.msg)
         return result;
     } else if(status === 400){
         alert(result.detail)
@@ -18,6 +17,10 @@ export function validateRes(response , result ){
 export async function loginUser (username , password) {
 
     const {response , result} = await apiBase("POST","public/create-token",null ,JSON.stringify({username, password}))
+
+    if(response.status === 200){
+        await setToken(result?.message)
+    }
     
     return validateRes(response, result)
     
@@ -35,8 +38,10 @@ export async function signupUser(username, password) {
 
 export async function setToken(token){
     const userDataObject = JSON.parse(localStorage.getItem('userData'));
-
-    if(userDataObject.token){
+    
+    if(!userDataObject.token){
         userDataObject.token = token;
     }
+    localStorage.setItem('userData', JSON.stringify(userDataObject));
+
 }

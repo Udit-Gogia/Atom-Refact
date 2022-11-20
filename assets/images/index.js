@@ -7,7 +7,6 @@ import IconCopy from './Atom/icon-copy.png';
 import IconEdit from './Atom/icon-edit.png';
 import IconFreelance from './Atom/icon-freelance.png';
 import IconFullTime from './Atom/icon-full-time.png';
-import IconInfo from './Atom/icon-info.png';
 import IconLike from './Atom/icon-like.png';
 import IconLiked from './Atom/icon-liked.png';
 import IconPdf from './Atom/icon-pdf.png';
@@ -29,7 +28,7 @@ import IconLogout from './Sidebar/icon-logout.png'
 import IconMyBookmark from './Sidebar/icon-my-bookmark.png'
 import IconMyPost from './Sidebar/icon-my-post.png'
 import IconMyProfile from './Sidebar/icon-my-profile.png'
-import IconMyProfile from './Sidebar/icon-policy.png'
+import IconPolicy from './Sidebar/icon-policy.png'
 import IconRating from './Sidebar/icon-rating.png'
 import IconSuggestAFeature from './Sidebar/icon-suggest-a-feature.png'
 
@@ -38,4 +37,4 @@ import IconSuggestAFeature from './Sidebar/icon-suggest-a-feature.png'
 import ImageAtom from './image-atom.jpg';
 import LogoAtom from './logo-atom.png';
 
-export {IconAdd , IconChat , IconContactUs , IconComment , IconConsultant , IconFeature , IconFeed , IconInfo , IconLogin , IconCopy , IconMyBookmark , IconMyPost , IconDelete , IconEdit , IconMyProfile , IconFreelance , IconFullTime  , IconLike , IconLiked , IconLogout , IconMyBookmark , IconPdf , IconPicture , IconRating , IconSuggestAFeature , IconStar , IconSuccess , IconTags , IconUser , ImageAtom , LogoAtom}
+export {ImageAtom , LogoAtom , IconContactUs, IconDelete, IconFeature, IconFeed , IconInfo , IconLogin , IconLogout, IconMyBookmark , IconMyPost  , IconMyProfile, IconPolicy, IconRating, IconSuggestAFeature , IconAdd, IconChat, IconComment , IconConsultant , IconCopy, IconEdit , IconFreelance , IconFullTime , IconLike, IconLiked, IconPdf , IconPicture, IconStar, IconSuccess, IconTags, IconUser}

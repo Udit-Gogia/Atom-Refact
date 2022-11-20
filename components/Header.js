@@ -1,31 +1,28 @@
 import Image from "next/image"
+import Link from 'next/link';
 import { useEffect, useState } from "react"
-import {LogoAtom} from '../assets/images'
-import {loginUser , signupUser} from './authFunctions'
+import { LogoAtom } from '../assets/images/index'
 
-export default async function Header(){
-    
+export default function Header(){
     const [isAuth , setAuth] = useState(false)
     useEffect(()=>{
         const userDataObject = JSON.parse(localStorage.getItem('userData'));
 
-        if (userDataObject.token !=undefined && userDataObject.token) {
-            setAuth(false);
-        } else {
-            setAuth(true)
-        }
+        userDataObject?.hasOwnProperty('token') ? setAuth(true) : setAuth(false)
+        
     })
     return (
-        <div className="flex justify-between px-4 py-2">
-            <div className="flex-auto">
+        <div className="flex justify-between px-8 py-2 border-b-2   ">
+            <div className="flex gap-2 items-center">
                 <Image src={LogoAtom} alt="logo-atom.png" height={"40"} width={"40"} />
                 <p className="font-semibold text-xl">atom</p>
             </div>
 
-            {isAuth && (
+            {!  isAuth && (
                 <div className="flex gap-2">
-                    <button onClick={loginUser}>login</button>
-                    <button onClick={signupUser}>signup</button>
+                    <Link href='/login' className="btnStyle1">login</Link>
+                    <Link  href='/signup' className="btnStyle2">signup</Link>
+                   
                 </div>
             )}
 

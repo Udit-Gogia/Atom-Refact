@@ -1,18 +1,20 @@
-import { useEffect } from 'react'
-import '../styles/globals.css'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header'
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
 
+  const [isAuth , setIsAuth]  = useState(false)
+
   useEffect(()=>{
-    const token = localStorage.getItem("token");
+    const token = JSON.parse(localStorage.getItem('userData'));
 
 		if (!localStorage.getItem("userData")) {
-			const userData = { userId: undefined, postLiked: [] , token : undefined};
+			const userData = { userId: undefined, postLiked: [] , token: undefined};
 			localStorage.setItem("userData", JSON.stringify(userData));
 		}
 
-		token ? setUserLoggedIn(true) : setUserLoggedIn(false);
+		token ? setIsAuth(true) : setIsAuth(false);
   })
 
   return (

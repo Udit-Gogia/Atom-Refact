@@ -22,9 +22,6 @@ export default async function apiBase(method , url , token = null
       const response = await fetch(endpoint, options);
       const result = await response.json();
 
-      if (response.status === 200) {
-         alert(successfullMsg)
-      }
       return {response, result};
         
      }
