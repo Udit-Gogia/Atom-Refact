@@ -44,7 +44,7 @@ export function SignupModal({username , password ,isOpen}){
                     as="h3"
                     className="text-xl font-medium text-center tracking-wide flex items-center"
                   >
-                    <Image src={IconSuccess} alt="icon-success.png" width={"60"} height={"60"}/>
+                    <Image src={IconSuccess} alt="icon-success.png" width={"60"} height={"60"} priority={true} style={{width: 'auto', height: 'auto'}}/>
                    Your account has been successfull created.
                   </Dialog.Title>
                  
@@ -75,7 +75,7 @@ export function SignupModal({username , password ,isOpen}){
 					className="flex btnStyle1 text-sm gap-2 mx-auto"
 					onClick={copyToClipboard}
 				>
-					<Image src={IconCopy} alt="icon-copy" width="20" height="20"></Image>
+					<Image src={IconCopy} alt="icon-copy" width="20" height="20" priority={true} style={{width: 'auto', height: 'auto'}}></Image>
 					<p>Copy to Clipboard</p>
 				</button>
 			</div>
