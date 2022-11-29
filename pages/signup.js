@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {TextComponent} from './login'
+import { InputComponent } from '../components/input'
 import {SignupModal} from '../components/Modals'
 import {loginUser, signupUser} from '../components/authFunctions'
 export default function Signup(){
@@ -10,8 +10,8 @@ export default function Signup(){
     return (
          <div className="flex flex-col md:w-1/3 mx-auto border-2 rounded-md p-8 sm:w-full my-8">
             <form>
-            <TextComponent label="username" name="inputUsername" value={signupUsername} stateMng={setSignupUsername} type="text" />
-            <TextComponent label="password" name="loginPassword" value={signupPassword} stateMng={setSignupPassword} type="password" />   
+            <InputComponent label="username" Name="inputUsername" value={signupUsername} stateMng={setSignupUsername} type="text" />
+            <InputComponent label="password" Name="loginPassword" value={signupPassword} stateMng={setSignupPassword} type="password" />   
 
             <button className="AuthButton"  onClick={async (e)=>{
                     e.preventDefault();
