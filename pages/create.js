@@ -37,6 +37,7 @@ export default function createPost() {
         {createPostDetails.map((createPost, index) => {
           return (
             <Link
+              key={index}
               href={createPost.redirect}
               className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-xl text-center"
             >

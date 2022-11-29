@@ -20,7 +20,10 @@ export default function Tags() {
       <div className="grid grid-cols-4 gap-8 w-full p-8 pl-0">
         {tagList?.map((tag, index) => {
           return (
-            <button className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8">
+            <button
+              key={index}
+              className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8"
+            >
               {checkPresence(tag?.["media_url"]) && (
                 <Image
                   src={tag?.["media_url"]}
