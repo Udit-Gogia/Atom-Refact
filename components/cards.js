@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState, Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
+import { useState } from "react";
 import parseTag from "./parseTag";
-
+import { likePost, verifyLikedPosts } from "./postFunctions";
+import { useRouter } from "next/router";
+import { alertUser } from "./Modals";
+import DropDown from "./Dropdown";
 import {
   IconUser,
   IconStar,
@@ -12,8 +14,8 @@ import {
   IconLike,
   IconComment,
   IconChat,
+  IconLiked,
 } from "../assets/images";
-import { useRouter } from "next/router";
 
 export function checkPresence(ele) {
   return ele != "undefinedundefined" &&
@@ -114,55 +116,6 @@ export function SidebarCard({
   );
 }
 
-export const DropDown = () => {
-  const links = [
-    { href: "/account-settings", label: "bookmark post" },
-    { href: "/support", label: "rate user" },
-    { href: "/license", label: "block user" },
-    { href: "/sign-out", label: "repost post" },
-    { href: "/sign-out", label: "repost user" },
-  ];
-  return (
-    <Menu>
-      <Menu.Button>
-        <Image
-          src={IconMenu}
-          width={"25"}
-          alt="icon-menu"
-          style={{ width: "auto" }}
-        />
-      </Menu.Button>
-      <Transition
-        enter="transition duration-100 ease-out"
-        enterFrom="transform scale-95 opacity-0"
-        enterTo="transform scale-100 opacity-100"
-        leave="transition duration-75 ease-out"
-        leaveFrom="transform scale-100 opacity-100"
-        leaveTo="transform scale-95 opacity-0"
-      >
-        <Menu.Items className="focus:outline-none absolute origin-top-left lg:w-56 divide-y divide-neutral-100 rounded-md bg-white shadow-lg border-2">
-          <div className="p-1">
-            {links.map((item, idx) => (
-              <Menu.Item disabled={item.disabled} key={idx}>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active && "bg-neutral-100 underline"
-                    } w-full rounded-md p-2 m-1 `}
-                    href="/account-settings"
-                  >
-                    {item.label}
-                  </button>
-                )}
-              </Menu.Item>
-            ))}
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
-  );
-};
-
 export function PostCard({
   postId,
   createdById,
@@ -185,6 +138,8 @@ export function PostCard({
   postCommentCount,
 }) {
   const router = useRouter();
+  const [likedStatus, setLikedStatus] = useState(verifyLikedPosts(postId));
+  const [likeCount, setLikeCount] = useState(postLikeCount);
   var date1 = new Date(postCreatedAt?.substring(0, 10));
   var date2 = new Date();
   var dayDiff = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
@@ -201,6 +156,16 @@ export function PostCard({
     window.scrollTo(0, 0);
 
     return parseTag(tagName, "tagClick");
+  }
+
+  async function likeThisPost() {
+    const token = JSON.parse(localStorage.getItem("userData"))?.token;
+
+    if (!verifyLikedPosts(postId) && token) {
+      await likePost(postId, token);
+      setLikedStatus(true);
+      setLikeCount((count) => count + 1);
+    }
   }
   return (
     <>
@@ -246,14 +211,13 @@ export function PostCard({
                 )}
               </div>
             </div>
-            <p>{postId}</p>
+            {/* <p>{postId}</p> */}
             <DropDown />
           </section>
 
           {checkPresence(postTitle) && (
             <p className="text-left text-xl font-semibold">{postTitle}</p>
           )}
-
           {checkPresence(postDescription) && (
             <p className="text-left text-lg">{postDescription}</p>
           )}
@@ -322,15 +286,19 @@ export function PostCard({
           <div className="flex items-center justify-between">
             <div className="flex gap-2">
               <section className="flex mr-4">
-                <button className="hover:bg-neutral-200 px-2 rounded-md">
+                <button
+                  className="hover:bg-neutral-200 px-2 rounded-md"
+                  onClick={likeThisPost}
+                  disabled={verifyLikedPosts(postId)}
+                >
                   <Image
-                    src={IconLike}
+                    src={likedStatus ? IconLiked : IconLike}
                     width={"22"}
                     height={"22"}
                     alt="icon-like"
                   />
                 </button>
-                <p className="font-semibold text-lg">{postLikeCount}</p>
+                <p className="font-semibold text-lg">{likeCount}</p>
               </section>
               <button className="hover:bg-neutral-100 px-2 rounded-md mr-4">
                 <Image

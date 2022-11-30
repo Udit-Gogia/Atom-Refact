@@ -47,7 +47,7 @@ export default function ShowPosts({ feedType, type }) {
         checkPresence(tagName) ? `&tag=${tagName}` : ""
       }${checkPresence(type) ? `&type=${type}` : ""} `
     );
-    console.log("result is ", result, response);
+
     checkPresence(result)
       ? setPosts((prevPosts) => [...new Set([...prevPosts, ...result])])
       : setHasMore(false);
@@ -55,7 +55,7 @@ export default function ShowPosts({ feedType, type }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-[45vw]">
       <InfiniteScroll
         dataLength={posts?.length}
         next={() => {

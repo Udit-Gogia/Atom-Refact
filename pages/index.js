@@ -10,10 +10,10 @@ export default function Home() {
   const router = useRouter();
   const [activeOption, setActiveOption] = useState(0);
   return (
-    <div className="flex bg-neutral-100">
+    <div className="flex bg-neutral-100 w-full">
       <Sidebar />
 
-      <div className="w-1/2 flex flex-col">
+      <div className="w-full flex flex-col">
         <Tab.Group>
           <Tab.List>
             <Tab
