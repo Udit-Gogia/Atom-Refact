@@ -1,8 +1,13 @@
+import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import ShowPosts from "../components/showPosts";
 import Sidebar from "../components/Sidebar";
-import { useState } from "react";
+import parseTag, { tagName } from "../components/parseTag";
+import { checkPresence } from "../components/cards";
+import { useRouter } from "next/router";
+
 export default function Home() {
+  const router = useRouter();
   const [activeOption, setActiveOption] = useState(0);
   return (
     <div className="flex bg-neutral-100">
@@ -50,12 +55,57 @@ export default function Home() {
           </Tab.List>
           <Tab.Panels>
             <Tab.Panel>
+              {checkPresence(tagName) && (
+                <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
+                  <p>{tagName}</p>
+                  <button
+                    type="button"
+                    className="ml-2"
+                    onClick={() => {
+                      parseTag(null);
+                      router.reload();
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              )}
               <ShowPosts feedType={"fresh"} />
             </Tab.Panel>
             <Tab.Panel>
+              {checkPresence(tagName) && (
+                <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
+                  <p>{tagName}</p>
+                  <button
+                    type="button"
+                    className="ml-2"
+                    onClick={() => {
+                      parseTag(null);
+                      router.reload();
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              )}
               <ShowPosts feedType={"most_liked"} />
             </Tab.Panel>
             <Tab.Panel>
+              {checkPresence(tagName) && (
+                <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
+                  <p>{tagName}</p>
+                  <button
+                    type="button"
+                    className="ml-2"
+                    onClick={() => {
+                      parseTag(null);
+                      router.reload();
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              )}
               <ShowPosts feedType={"trending"} />
             </Tab.Panel>
           </Tab.Panels>

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import parseTag from "./parseTag";
+
 import {
   IconUser,
   IconStar,
@@ -11,6 +13,7 @@ import {
   IconComment,
   IconChat,
 } from "../assets/images";
+import { useRouter } from "next/router";
 
 export function checkPresence(ele) {
   return ele != "undefinedundefined" &&
@@ -20,6 +23,8 @@ export function checkPresence(ele) {
     ele &&
     ele != undefined &&
     ele != null &&
+    ele != "no data" &&
+    ele != ["no data"] &&
     ele != ""
     ? true
     : false;
@@ -102,6 +107,7 @@ export function SidebarCard({
         width="26"
         height="26"
         className="mx-2"
+        style={{ width: "auto" }}
       />
       <p className="mx-2 roboto-reg ">{sidebarSection.display}</p>
     </Link>
@@ -119,7 +125,12 @@ export const DropDown = () => {
   return (
     <Menu>
       <Menu.Button>
-        <Image src={IconMenu} width={"25"} alt="icon-menu" />
+        <Image
+          src={IconMenu}
+          width={"25"}
+          alt="icon-menu"
+          style={{ width: "auto" }}
+        />
       </Menu.Button>
       <Transition
         enter="transition duration-100 ease-out"
@@ -173,11 +184,24 @@ export function PostCard({
   postLikeCount,
   postCommentCount,
 }) {
+  const router = useRouter();
   var date1 = new Date(postCreatedAt?.substring(0, 10));
   var date2 = new Date();
   var dayDiff = parseInt((date2 - date1) / (1000 * 60 * 60 * 24), 10);
   dayDiff = `${dayDiff} d`;
 
+  function showTagFeed(tagName) {
+    router.push(
+      {
+        query: { feed_type: router.query.feed_type, tag: tagName },
+      },
+      undefined,
+      { shallow: true }
+    );
+    window.scrollTo(0, 0);
+
+    return parseTag(tagName, "tagClick");
+  }
   return (
     <>
       {checkPresence(postId) && (
@@ -191,31 +215,38 @@ export function PostCard({
                   className="rounded-full "
                   width="60"
                   height="60"
+                  style={{ width: "auto", height: "auto" }}
                 />
               ) : (
                 <Image
                   src={IconUser}
                   alt={createdByUsername}
-                  className="rounded-full "
+                  className="rounded-full"
+                  style={{ width: "auto", height: "auto" }}
                   width="60"
                   height="60"
                 />
               )}
 
-              <div className="grid grid-cols-1 gap-2">
+              <div className="grid grid-cols-1">
                 {checkPresence(createdByUsername) && (
                   <p className="text-xl">{createdByUsername}</p>
                 )}
 
                 {checkPresence(toString(createdByRating)) && (
                   <p className="flex">
-                    <Image src={IconStar} alt="icon-rating" width={"25"} />
+                    <Image
+                      src={IconStar}
+                      alt="icon-rating"
+                      width={"20"}
+                      style={{ width: "auto" }}
+                    />
                     <span className="mx-2 text-lg">{createdByRating}</span>
                   </p>
                 )}
               </div>
             </div>
-
+            <p>{postId}</p>
             <DropDown />
           </section>
 
@@ -229,8 +260,9 @@ export function PostCard({
           {checkPresence(postMediaUrl) &&
             (postMediaUrl.substring(postMediaUrl.length - 3) != "pdf" ? (
               <Image
-                className={`w-2/3 rounded-md mx-auto`}
+                className={` rounded-md mx-auto`}
                 src={postMediaUrl}
+                style={{ width: "auto" }}
                 alt={createdByUsername || "icon"}
                 width="600"
                 height="400"
@@ -239,8 +271,9 @@ export function PostCard({
               checkPresence(postId) && (
                 <div className="w-full flex justify-evenly items-center border-2 p-2 rounded-md">
                   <Image
-                    className={` rounded-md`}
+                    className={`rounded-md`}
                     src={IconPdf}
+                    style={{ width: "auto" }}
                     alt="icon-pdf"
                     width={"40"}
                     height={"40"}
@@ -318,7 +351,7 @@ export function PostCard({
               </button>
               <p className="font-semibold text-lg">{postCommentCount}</p>
             </div>
-            <div></div>
+            <div>{dayDiff}</div>
           </div>
         </div>
       )}

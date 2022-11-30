@@ -1,9 +1,14 @@
 import Sidebar from "../components/Sidebar";
 import callApi from "../components/callApi";
-import { useState, useEffect } from "react";
 import { checkPresence } from "../components/cards";
+import parseTag from "../components/parseTag";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
+
 export default function Tags() {
+  const router = useRouter();
   const [tagList, setTagList] = useState([]);
   useEffect(() => {
     async function getTags() {
@@ -23,6 +28,13 @@ export default function Tags() {
             <button
               key={index}
               className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8"
+              onClick={() => {
+                router.push({
+                  pathname: "/",
+                  query: { feed_type: "fresh", tag: tag?.tag },
+                });
+                return parseTag(tag?.tag, "tagclick");
+              }}
             >
               {checkPresence(tag?.["media_url"]) && (
                 <Image
