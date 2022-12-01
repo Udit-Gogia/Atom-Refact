@@ -59,7 +59,7 @@ export function SignupModal({ username, password, isOpen }) {
 
                 <div className="flex flex-col sm:py-4 lg:py-2  mb-12s">
                   <div className="flex justify-around my-4 items-center w-full">
-                    <div className="lg:text-lg sm:text-md sm:px-4 roboto-reg basis-1/2 py-2 text-center border-2 border-[#191919] rounded-l-lg ">
+                    <div className="lg:text-lg sm:text-md sm:px-4  basis-1/2 py-2 text-center border-2 border-[#191919] rounded-l-lg ">
                       your username is{" "}
                     </div>
                     <div className="text-lg tracking-wide px-12 lg:border-l-0 lg:py-2 sm:py-5 lg:border-2 border-[#191919] rounded-r-lg text-center text-[#191919] basis-1/2">
@@ -70,7 +70,7 @@ export function SignupModal({ username, password, isOpen }) {
                   <hr className="w-[17vw] mx-auto sm:w-1/2 bg-primaryBlack h-[2px]" />
 
                   <div className="flex justify-around my-4 items-center w-full">
-                    <div className="lg:text-lg sm:text-md sm:px-4 roboto-reg basis-1/2 py-2 text-center border-2 border-[#191919] rounded-l-lg">
+                    <div className="lg:text-lg sm:text-md sm:px-4  basis-1/2 py-2 text-center border-2 border-[#191919] rounded-l-lg">
                       your password is{" "}
                     </div>
                     <div className="text-lg  tracking-wide px-12 lg:border-l-0 lg:py-2 sm:py-5 lg:border-2 border-[#191919] rounded-r-lg text-center text-[#191919] basis-1/2">

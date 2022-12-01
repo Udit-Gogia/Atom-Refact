@@ -111,7 +111,7 @@ export function SidebarCard({
         className="mx-2"
         style={{ width: "auto" }}
       />
-      <p className="mx-2 roboto-reg ">{sidebarSection.display}</p>
+      <p className="mx-2  ">{sidebarSection.display}</p>
     </Link>
   );
 }
@@ -246,7 +246,7 @@ export function PostCard({
                     href={postMediaUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-semibold roboto-reg"
+                    className="font-semibold "
                   >
                     View
                   </a>

@@ -1,4 +1,6 @@
 import callApi from "./callApi";
+import getUserData from "./getUserData";
+import { alertUser } from "./Modals";
 
 export function validateRes(response, result) {
   const { status } = response;
@@ -6,10 +8,28 @@ export function validateRes(response, result) {
   if (status === 200) {
     return result;
   } else if (status === 400) {
-    alert(result.detail);
+    if (result.message === undefined) alertUser(result.detail);
+    else return alertUser(result.message);
   } else if (status === 422) {
-    alert(result.detail[0].msg);
+    alertUser(result.detail[0].msg);
+    return;
   }
+}
+
+export async function setUserDataObject(key, value) {
+  const userDataObject = JSON.parse(localStorage.getItem("userData"));
+  if (!userDataObject[key]) {
+    userDataObject[key] = value;
+  }
+  localStorage.setItem("userData", JSON.stringify(userDataObject));
+}
+
+export async function updateUserDataObject(key, value) {
+  console.log("entered userDataObject", key, value);
+  const userDataObject = JSON.parse(localStorage.getItem("userData"));
+  userDataObject[key] = value;
+  console.log("userDataObject before saving is ", userDataObject);
+  localStorage.setItem("userData", JSON.stringify(userDataObject));
 }
 
 export async function loginUser(username, password) {
@@ -21,7 +41,9 @@ export async function loginUser(username, password) {
   );
 
   if (response.status === 200) {
-    await setToken(result?.message);
+    await setUserDataObject("token", result?.message);
+    await setUserDataObject("isAuth", true);
+    await setUserId();
   }
 
   return validateRes(response, result);
@@ -42,11 +64,20 @@ export async function signupUser(username, password) {
   } else validateRes(response, result);
 }
 
-export async function setToken(token) {
-  const userDataObject = JSON.parse(localStorage.getItem("userData"));
+export async function setUserId() {
+  const { id: userId } = await getUserData();
+  setUserDataObject("userId", userId);
+}
 
-  if (!userDataObject.token) {
-    userDataObject.token = token;
-  }
-  localStorage.setItem("userData", JSON.stringify(userDataObject));
+export async function deleteUser() {
+  console.log("entered deleteUser");
+  const { token } = JSON.parse(localStorage.getItem("userData"));
+
+  const { response, result } = await callApi(
+    "DELETE",
+    "private/self/delete-user",
+    token
+  );
+
+  return validateRes(response, result);
 }

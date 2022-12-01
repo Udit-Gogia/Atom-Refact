@@ -1,3 +1,4 @@
+import { alertUser } from "./Modals";
 const baseUrlStag = "https://stag.atom.wiki";
 const baseUrlProd = "https://prod.atom.wiki";
 const isStag = true;
@@ -25,6 +26,8 @@ export default async function callApi(
 
   const response = await fetch(endpoint, options);
   const result = await response.json();
-
+  if (result.status && successfullMsg) {
+    alertUser(successfullMsg);
+  }
   return { response, result };
 }

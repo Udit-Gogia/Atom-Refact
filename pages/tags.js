@@ -6,6 +6,7 @@ import parseTag from "../components/parseTag";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Tags() {
   const router = useRouter();
@@ -19,20 +20,17 @@ export default function Tags() {
   }, []);
 
   return (
-    <div className="flex bg-neutral-100 w-full">
+    <div className="flex bg-neutral-100 w-full ">
       <Sidebar selectedOption={1} />
 
       <div className="grid grid-cols-4 gap-8 w-full p-8 pl-0">
         {tagList?.map((tag, index) => {
           return (
-            <button
+            <Link
+              href={`/?feed_type=fresh&tag=${tag?.tag}`}
               key={index}
               className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8"
               onClick={() => {
-                router.push({
-                  pathname: "/",
-                  query: { feed_type: "fresh", tag: tag?.tag },
-                });
                 return parseTag(tag?.tag, "tagclick");
               }}
             >
@@ -46,7 +44,7 @@ export default function Tags() {
               )}
               <p className="text-lg tracking-wide font-semibold">{tag?.tag}</p>
               <p>({tag?.count})</p>
-            </button>
+            </Link>
           );
         })}
       </div>

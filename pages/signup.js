@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { InputComponent } from "../components/input";
+import { InputComponent } from "../components/inputs";
 import { SignupModal } from "../components/Modals";
 import { loginUser, signupUser } from "../components/authFunctions";
 export default function Signup() {
