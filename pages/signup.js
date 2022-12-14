@@ -1,8 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { InputComponent } from "../components/inputs";
-import { SignupModal } from "../components/Modals";
-import { loginUser, signupUser } from "../components/authFunctions";
+import { SignupModal, alertUser } from "../components/Modals";
+
+import {
+  loginUser,
+  signupUser,
+  getUserDataObject,
+} from "../components/authFunctions";
 export default function Signup() {
+  const router = useRouter();
+  useEffect(() => {
+    const { isAuth } = getUserDataObject();
+    if (isAuth) {
+      router.back();
+      alertUser("Signout first to Signin as a new user.");
+    }
+  }, []);
   const [signupUsername, setSignupUsername] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [isOpen, setIsOpen] = useState(false);

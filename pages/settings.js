@@ -68,7 +68,7 @@ export default function Settings() {
                 height={"35"}
                 style={{ width: "auto" }}
               />
-              <p className="text-lg tracking-wide font-semibold">
+              <p className="text-xl tracking-wide font-semibold">
                 {page.label}
               </p>
             </Link>

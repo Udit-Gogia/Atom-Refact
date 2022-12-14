@@ -10,8 +10,6 @@ export const verifyLikedPosts = (post_id) => {
 };
 
 export async function likePost(post_id, token = null) {
-  console.log("input data in likePost ", post_id, token);
-
   const userDataObject = JSON.parse(localStorage.getItem("userData"));
 
   if (!userDataObject?.postLiked.includes(post_id)) {

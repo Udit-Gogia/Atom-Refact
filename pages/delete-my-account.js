@@ -1,10 +1,21 @@
 import { IconInfo } from "../assets/images";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Image from "next/image";
-import { updateUserDataObject, deleteUser } from "../components/authFunctions";
+import {
+  updateUserDataObject,
+  deleteUser,
+  getUserDataObject,
+} from "../components/authFunctions";
 
 export default function DeleteMyAccount() {
   const router = useRouter();
+  useEffect(() => {
+    const { isAuth } = getUserDataObject();
+    if (!isAuth) {
+      router.back();
+    }
+  }, []);
 
   async function handleSignOut() {
     await deleteUser();

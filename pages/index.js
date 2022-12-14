@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   const [activeOption, setActiveOption] = useState(0);
   return (
-    <div className="flex bg-neutral-100 w-full">
+    <div className="flex bg-neutral-100 w-full h-screen">
       <Sidebar />
 
       <div className="w-full flex flex-col">
@@ -54,6 +54,7 @@ export default function Home() {
             </Tab>
           </Tab.List>
           <Tab.Panels>
+            {/* fresh posts starts */}
             <Tab.Panel>
               {checkPresence(tagName) && (
                 <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
@@ -72,6 +73,9 @@ export default function Home() {
               )}
               <ShowPosts feedType={"fresh"} />
             </Tab.Panel>
+            {/* fresh posts ends */}
+
+            {/* most liked posts starts */}
             <Tab.Panel>
               {checkPresence(tagName) && (
                 <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
@@ -90,6 +94,9 @@ export default function Home() {
               )}
               <ShowPosts feedType={"most_liked"} />
             </Tab.Panel>
+            {/* most liked posts ends */}
+
+            {/* trending posts starts */}
             <Tab.Panel>
               {checkPresence(tagName) && (
                 <div className="lg:mr-3 bg-zinc-200 text-md tracking-wide w-fit px-2 py-1 rounded-sm border-l-2 border-[#191919] my-2 flex">
@@ -108,6 +115,7 @@ export default function Home() {
               )}
               <ShowPosts feedType={"trending"} />
             </Tab.Panel>
+            {/* most liked posts ends */}
           </Tab.Panels>
         </Tab.Group>
       </div>

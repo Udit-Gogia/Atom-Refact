@@ -1,10 +1,20 @@
 import { IconInfo } from "../assets/images";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { updateUserDataObject } from "../components/authFunctions";
+import {
+  updateUserDataObject,
+  getUserDataObject,
+} from "../components/authFunctions";
+import { useEffect } from "react";
 
 export default function Signout() {
   const router = useRouter();
+  useEffect(() => {
+    const { isAuth } = getUserDataObject();
+    if (!isAuth) {
+      router.back();
+    }
+  }, []);
 
   async function handleSignOut() {
     await updateUserDataObject("token", undefined);

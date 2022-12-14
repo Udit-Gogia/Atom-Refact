@@ -1,15 +1,13 @@
 import { IconAdd } from "../assets/images";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { alertUser } from "./Modals";
-import callApi from "./callApi";
 import { handleFileInput } from "./fileFunctions";
 import { checkPresence } from "./cards";
 
 export const InputComponent = ({ label, Name, value, stateMng, type }) => {
   return (
-    <div className="flex flex-col">
-      <label htmlFor={Name} className="font-semibold my-2">
+    <div className="flex flex-col gap-2">
+      <label htmlFor={Name} className="font-semibold text-lg tracking-wide">
         {label}
       </label>
       <input
@@ -18,7 +16,7 @@ export const InputComponent = ({ label, Name, value, stateMng, type }) => {
         value={value}
         onChange={(e) => stateMng(e.target.value)}
         required
-        className="border-2 rounded-md p-2 my-2 focus:outline-[#191919]"
+        className="border-2 rounded-md p-2  focus:outline-[#191919]"
       ></input>
     </div>
   );
@@ -89,6 +87,19 @@ export const FileComponent = ({ file, setFile, accept }) => {
         onChange={(e) => handleFileInput(e, setFile)}
         name="file-input"
       />
+    </div>
+  );
+};
+
+export const TextDisplay = ({ heading, content }) => {
+  return (
+    <div className="flex flex-col gap-1">
+      <p className="font-semibold text-lg tracking-wide">{heading}</p>
+      {checkPresence(content) ? (
+        <p className="text-md text-neutral-600">{content}</p>
+      ) : (
+        <p className="text-sm text-neutral-400">Unknown</p>
+      )}
     </div>
   );
 };

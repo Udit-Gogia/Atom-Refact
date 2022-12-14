@@ -26,8 +26,10 @@ export default async function callApi(
 
   const response = await fetch(endpoint, options);
   const result = await response.json();
-  if (result.status && successfullMsg) {
+
+  if (result.status === "true" && successfullMsg) {
     alertUser(successfullMsg);
   }
+
   return { response, result };
 }

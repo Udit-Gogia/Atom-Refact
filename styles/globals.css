@@ -1,53 +1,61 @@
 @tailwind base;
 @tailwind components;
 
-
-.btnStyle1{
-    padding: 0.25rem 0.75rem;
-    font-size: 1.25rem;
-    line-height: 1.75rem; 
-    font-weight: 500; 
-    letter-spacing: 0.025em; 
-    border-radius: 0.375rem; 
+.btnStyle1 {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  border-radius: 0.375rem;
 }
 
-.btnStyle1:hover{
-    text-decoration: underline;
+.btnStyle1:hover {
+  text-decoration: underline;
 }
 
-.btnStyle2{
-    padding: 0.25rem 0.75rem;
-    font-size: 1.125rem;
-    color: #404040;
-    line-height: 1.75rem; 
-    font-weight: 500; 
-    letter-spacing: 0.025em; 
-    border: 2px solid #191919;
-    border-radius: 0.375rem; 
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; 
+.btnStyle2 {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.125rem;
+  color: #404040;
+  line-height: 1.75rem;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+  border: 2px solid #191919;
+  border-radius: 0.375rem;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
 }
 
 .btnStyle2:hover {
-    color: #ffffff; 
-    text-decoration: underline; 
-    background: #191919;
+  color: #ffffff;
+  text-decoration: underline;
+  background: #191919;
 }
 
-.AuthButton{
-    padding: 0.75rem; 
-    margin: 1rem 0;
-    color: #fff; 
-    font-size: 1.125rem;
-    line-height: 1.75rem; 
-    width: 100%; 
-    border-radius: 0.375rem; 
-    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform; 
-    background:#191919
+.AuthButton {
+  padding: 0.75rem;
+  margin: 1rem 0;
+  color: #fff;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  width: 100%;
+  border-radius: 0.375rem;
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  background: #191919;
 }
 
 .AuthButton:hover {
-    text-decoration: underline; 
-    background: #191919e6;
+  text-decoration: underline;
+  background: #191919e6;
+}
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 }
 
 @tailwind utilities;

@@ -1,7 +1,19 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
+import { validateRes, getUserDataObject } from "../components/authFunctions";
 import callApi from "../components/callApi";
+import { alertUser } from "../components/Modals";
 
 export default function StarRating() {
+  const router = useRouter();
+  useEffect(() => {
+    const { isAuth } = getUserDataObject();
+    if (!isAuth) {
+      router.back();
+      alertUser("Login To Continue");
+    }
+  }, []);
+
   const [rating, setRating] = useState(5);
   const [hover, setHover] = useState(5);
 
@@ -11,7 +23,6 @@ export default function StarRating() {
   }
 
   async function submitRating() {
-    console.log(hover, rating);
     const { token } = JSON.parse(localStorage.getItem("userData"));
     const { response, result } = await callApi(
       "POST",
@@ -23,8 +34,9 @@ export default function StarRating() {
       }),
       "rating sent successfully"
     );
-
-    result?.status && setRating(5) && setHover(5);
+    setRating(5);
+    setHover(5);
+    validateRes(response, result);
   }
 
   return (

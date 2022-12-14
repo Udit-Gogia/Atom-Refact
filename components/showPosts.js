@@ -35,7 +35,9 @@ export default function ShowPosts({ feedType, type }) {
       }${checkPresence(type) ? `&type=${type}` : ""} `
     );
 
-    checkPresence(result) ? setPosts(result) : setHasMore(false);
+    Array.isArray(result) && checkPresence(result)
+      ? setPosts(result)
+      : setHasMore(false);
   };
 
   const getMorePosts = async () => {
@@ -66,7 +68,8 @@ export default function ShowPosts({ feedType, type }) {
         endMessage={<p>end of posts</p>}
       >
         {checkPresence(posts)
-          ? posts?.map((post, index) => {
+          ? Array.isArray(posts) &&
+            posts?.map((post, index) => {
               return (
                 <div key={index} className="flex p-4 pt-0 flex-1 text-center ">
                   <PostCard

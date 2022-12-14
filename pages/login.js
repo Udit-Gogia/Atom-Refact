@@ -1,10 +1,19 @@
-import { useState } from "react";
-import { loginUser } from "../components/authFunctions";
+import { useState, useEffect } from "react";
+import { loginUser, getUserDataObject } from "../components/authFunctions";
 import { useRouter } from "next/router";
 import { InputComponent } from "../components/inputs";
+import { alertUser } from "../components/Modals";
 
 export default function Login() {
   const router = useRouter();
+  useEffect(() => {
+    const { isAuth } = getUserDataObject();
+    if (isAuth) {
+      router.back();
+      alertUser("You have already logged in");
+    }
+  }, []);
+
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
