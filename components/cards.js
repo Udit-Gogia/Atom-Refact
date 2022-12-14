@@ -98,7 +98,7 @@ export function SidebarCard({
   return (
     <Link
       href={sidebarSection.href}
-      className={`flex items-center py-4 px-8 w-full rounded-md hover:underline  ${
+      className={`flex items-center py-4 px-4 md:px-8 w-full rounded-md hover:underline  ${
         index == isActiveIndex ? "bg-white" : "bg-neutral-100"
       }`}
       onClick={() => setActiveOption(index)}
@@ -111,7 +111,7 @@ export function SidebarCard({
         className="mx-2"
         style={{ width: "auto" }}
       />
-      <p className="mx-2  ">{sidebarSection.display}</p>
+      <p className="mx-2">{sidebarSection.display}</p>
     </Link>
   );
 }

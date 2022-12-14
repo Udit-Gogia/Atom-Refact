@@ -25,7 +25,7 @@ export default function About() {
   } = checkPresence(about) && about[0];
 
   return (
-    <div className="bg-neutral-100">
+    <div className="bg-neutral-100 h-screen">
       {checkPresence(about) && (
         <CompanyCard
           title={title}

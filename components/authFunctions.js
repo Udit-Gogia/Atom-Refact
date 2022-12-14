@@ -108,3 +108,17 @@ export async function updateUserDataFromApi(dataObject) {
 
   return validateRes(response, result);
 }
+
+export async function updatePassword(dataObject) {
+  const token = getUserDataObject("token");
+
+  const { response, result } = await callApi(
+    "PUT",
+    "private/self/update-user-password",
+    token,
+    JSON.stringify(dataObject),
+    "password update successfully"
+  );
+
+  return validateRes(response, result);
+}

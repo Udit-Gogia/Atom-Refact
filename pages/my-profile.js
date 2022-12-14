@@ -1,9 +1,8 @@
-import { IconEdit } from "../assets/images";
-import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useState } from "react";
+import { IconEdit } from "../assets/images";
 import UserProfile from "../components/userProfile";
 import UpdateUserDetail from "../components/updateUserProfile";
-import { getUserDataObject } from "../components/authFunctions";
 
 export default function MyProfile() {
   const [editMode, setEditMode] = useState(false);
@@ -29,7 +28,7 @@ export default function MyProfile() {
               <Image src={IconEdit} alt="icon-edit" width="25" height="25" />
             </button>
             <button
-              className={`text-lg px-4 mr-2 hover:underline text-[#404040] font-medium tracking-wide hover:bg-neutral-200 rounded-lg ${
+              className={`text-lg px-2 md:px-4 mr-2 hover:underline text-[#404040] font-medium tracking-wide hover:bg-neutral-200 rounded-lg ${
                 editMode ? "inline" : "hidden"
               }`}
               onClick={() => {
@@ -39,7 +38,7 @@ export default function MyProfile() {
               cancel
             </button>
             <button
-              className={`lg:text-lg sm:text-md sm:px-4 tracking-wide bg-[#191919] lg:px-4 lg:border-2 border-[#191919] rounded-lg text-center text-white basis-1/2 mx-2 hover:bg-white hover:text-[#191919] transition editButton ${
+              className={`lg:text-lg sm:text-md px-2 md:px-4 tracking-wide bg-[#191919] lg:px-4 lg:border-2 border-[#191919] rounded-lg text-center text-white basis-1/2 mx-2 hover:bg-white hover:text-[#191919] transition editButton ${
                 editMode ? "inline" : "hidden"
               }`}
               onClick={() => setUpdate(!update)}

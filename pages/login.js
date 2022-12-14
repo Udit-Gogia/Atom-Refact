@@ -18,8 +18,8 @@ export default function Login() {
   const [loginPassword, setLoginPassword] = useState("");
 
   return (
-    <div className="flex flex-col w-1/3 mx-auto border-2 rounded-md p-8 my-8">
-      <form>
+    <div className="flex flex-col w-1/3 mx-auto border-2 rounded-md p-8 my-8 ">
+      <form className="flex flex-col gap-4">
         <InputComponent
           label="username"
           Name="inputUsername"

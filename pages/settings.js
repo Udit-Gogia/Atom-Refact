@@ -53,13 +53,13 @@ export default function Settings() {
   return (
     <div className="flex bg-neutral-100 w-full h-screen">
       <Sidebar selectedOption={4} />
-      <div className="grid grid-cols-4 gap-8 w-full p-8 pl-0">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full p-8 pl-0 ">
         {pageList?.map((page, index) => {
           return (
             <Link
               key={index}
               href={page.redirect}
-              className="flex flex-col bg-white p-4 gap-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8"
+              className="flex flex-col bg-white p-4 gap-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8 "
             >
               <Image
                 src={page?.icon}
