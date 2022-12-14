@@ -58,7 +58,7 @@ export default function My() {
                 height={"35"}
                 style={{ width: "auto" }}
               />
-              <p className="text-xl tracking-wide font-semibold">
+              <p className="text-xl tracking-wide font-semibold sm:text-center">
                 {page.label}
               </p>
             </Link>

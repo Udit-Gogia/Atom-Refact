@@ -33,13 +33,13 @@ export default function createPost() {
     <div className="flex bg-neutral-100 w-screen h-screen">
       <Sidebar selectedOption={2} />
 
-      <div className="grid grid-cols-3 gap-8 w-full p-8 h-1/2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full p-2 md:p-8 h-1/2">
         {createPostDetails.map((createPost, index) => {
           return (
             <Link
               key={index}
               href={createPost.redirect}
-              className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-xl text-center"
+              className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-lg md:text-xl text-center"
             >
               {createPost.label}
             </Link>

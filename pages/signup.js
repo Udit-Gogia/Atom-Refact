@@ -23,7 +23,7 @@ export default function Signup() {
 
   return (
     <div className="flex flex-col md:w-1/3 mx-auto border-2 rounded-md p-8 sm:w-full my-8">
-      <form>
+      <form className="flex flex-col gap-4">
         <InputComponent
           label="username"
           Name="inputUsername"
