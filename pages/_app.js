@@ -16,7 +16,7 @@ function MyApp({ Component, pageProps }) {
   });
 
   return (
-    <div className="flex flex-col overflow-hidden ">
+    <div className="flex flex-col ">
       <Header />
       <Component {...pageProps} />
     </div>

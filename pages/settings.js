@@ -51,7 +51,7 @@ export default function Settings() {
   ];
 
   return (
-    <div className="flex bg-neutral-100 w-full h-screen">
+    <div className="flex bg-neutral-100 w-full h-screen ">
       <Sidebar selectedOption={4} />
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full p-8 pl-0 ">
         {pageList?.map((page, index) => {

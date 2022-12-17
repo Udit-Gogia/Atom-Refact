@@ -1,7 +1,7 @@
 import { FileComponent, TextAreaComponent } from "../components/inputs";
-import getUserData from "../components/getUserData";
+
 import callApi from "../components/callApi";
-import { validateRes } from "../components/authFunctions";
+import { validateRes, getUserDataFromApi } from "../components/authFunctions";
 import { useState, useEffect } from "react";
 import { IconAdd } from "../assets/images";
 
@@ -14,7 +14,8 @@ export default function ContactUs() {
     isAuth ? setUserAuthenticated(true) : setUserAuthenticated(false);
   }, []);
   const submitRequest = async () => {
-    const { id: created_by_id } = userAuthenticated && (await getUserData());
+    const { id: created_by_id } =
+      userAuthenticated && (await getUserDataFromApi());
     const data = {
       description,
       media_url: image != IconAdd ? image : null,

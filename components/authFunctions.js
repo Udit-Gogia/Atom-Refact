@@ -1,6 +1,6 @@
 import callApi from "./callApi";
 import { checkPresence } from "./cards";
-import getUserData from "./getUserData";
+
 import { alertUser } from "./Modals";
 
 export function validateRes(response, result) {
@@ -68,7 +68,7 @@ export async function signupUser(username, password) {
 }
 
 export async function setUserId() {
-  const { id: userId } = await getUserData();
+  const { id: userId } = await getUserDataFromApi();
   setUserDataObject("userId", userId);
 }
 

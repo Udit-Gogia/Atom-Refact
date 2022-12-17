@@ -1,5 +1,23 @@
 import callApi from "./callApi";
-import { validateRes } from "./authFunctions";
+import { getUserDataObject, validateRes } from "./authFunctions";
+
+export const createPostFunction = async (dataObject) => {
+  const token = getUserDataObject("token");
+
+  Object.keys(dataObject).forEach(
+    (key) => dataObject[key] == null && delete dataObject[key]
+  );
+
+  const { response, result } = await callApi(
+    "POST",
+    "private/all/create-post",
+    token,
+    JSON.stringify(dataObject),
+    "post created successfully"
+  );
+
+  return validateRes(response, result);
+};
 
 export const verifyLikedPosts = (post_id) => {
   const currLikedPosts = JSON.parse(localStorage.getItem("userData")).postLiked;

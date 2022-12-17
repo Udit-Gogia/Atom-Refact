@@ -23,14 +23,14 @@ export default function Tags() {
     <div className="flex bg-neutral-100 w-full h-screen">
       <Sidebar selectedOption={1} />
 
-      <div className="grid grid-cols-4 gap-8 w-full p-8 pl-0">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 w-full p-8 pl-0 overflow-scroll">
         {Array.isArray(tagList) &&
           tagList?.map((tag, index) => {
             return (
               <Link
                 href={`/?feed_type=fresh&tag=${tag?.tag}`}
                 key={index}
-                className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8"
+                className="flex flex-col bg-white p-4 rounded-md hover:border-primaryBlack items-center justify-center hover:shadow-xl border-t-8 h-[15rem]"
                 onClick={() => {
                   return parseTag(tag?.tag, "tagclick");
                 }}

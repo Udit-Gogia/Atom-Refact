@@ -228,8 +228,8 @@ export function PostCard({
                 src={postMediaUrl}
                 style={{ width: "auto" }}
                 alt={createdByUsername || "icon"}
-                width="600"
-                height="400"
+                width="200"
+                height="250"
               />
             ) : (
               checkPresence(postId) && (

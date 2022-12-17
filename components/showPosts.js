@@ -50,14 +50,14 @@ export default function ShowPosts({ feedType, type }) {
       }${checkPresence(type) ? `&type=${type}` : ""} `
     );
 
-    checkPresence(result)
+    checkPresence(result) && Array.isArray(result)
       ? setPosts((prevPosts) => [...new Set([...prevPosts, ...result])])
       : setHasMore(false);
     setPageNumber(pageNumber);
   };
 
   return (
-    <div className="w-[45vw]">
+    <div className="w-[45vw] ">
       <InfiniteScroll
         dataLength={posts?.length}
         next={() => {
@@ -66,6 +66,7 @@ export default function ShowPosts({ feedType, type }) {
         hasMore={hasMore}
         loader={<p>loading ...</p>}
         endMessage={<p>end of posts</p>}
+        className="h-screen"
       >
         {checkPresence(posts)
           ? Array.isArray(posts) &&

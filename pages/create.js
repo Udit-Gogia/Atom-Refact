@@ -1,7 +1,15 @@
 import Link from "next/link";
 import Sidebar from "../components/Sidebar";
+import { useEffect, useState } from "react";
+import { getUserDataObject } from "../components/authFunctions";
+import { alertUser } from "../components/Modals";
 
 export default function createPost() {
+  const [isLoggedin, setIsLoggedin] = useState();
+  useEffect(() => {
+    var { isAuth } = getUserDataObject();
+    setIsLoggedin(isAuth);
+  }, []);
   const createPostDetails = [
     {
       label: "Share your random thoughts",
@@ -24,7 +32,7 @@ export default function createPost() {
       redirect: "/create-post-service",
     },
     {
-      label: "*name suggestion required for create lead*",
+      label: "Do you need an app/website",
       redirect: "/create-lead",
     },
   ];
@@ -37,8 +45,13 @@ export default function createPost() {
         {createPostDetails.map((createPost, index) => {
           return (
             <Link
+              onClick={() => {
+                if (!isLoggedin) {
+                  alertUser("login to continue");
+                }
+              }}
               key={index}
-              href={createPost.redirect}
+              href={!isLoggedin ? "/create" : createPost.redirect}
               className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-lg md:text-xl text-center"
             >
               {createPost.label}
