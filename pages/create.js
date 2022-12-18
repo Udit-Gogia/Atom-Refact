@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { getUserDataObject } from "../components/authFunctions";
 import { alertUser } from "../components/Modals";
 
-export default function createPost() {
+export default function Create() {
   const [isLoggedin, setIsLoggedin] = useState();
   useEffect(() => {
     var { isAuth } = getUserDataObject();
