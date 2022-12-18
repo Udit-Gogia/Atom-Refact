@@ -7,7 +7,7 @@ import {
   TextAreaComponent,
 } from "../components/inputs";
 
-export default function createPost() {
+export default function CreatePost() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(IconAdd);
   const [tagText, setTagText] = useState("");

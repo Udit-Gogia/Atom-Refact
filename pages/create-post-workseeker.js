@@ -58,7 +58,7 @@ const experienceOptions = [
   ">30 years of experience",
 ];
 
-export default function createPostWorkseeker({ serviceType, workProfile }) {
+export default function CreatePostWorkseeker({ serviceType, workProfile }) {
   const [formData, setFormData] = useState({
     work_type: "",
     work_profile: "",

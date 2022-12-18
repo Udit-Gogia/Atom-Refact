@@ -4,7 +4,7 @@ import { IconAdd } from "../assets/images";
 import { createPostFunction } from "../components/postFunctions";
 import { alertUser } from "../components/Modals";
 
-export default function createPostMeme() {
+export default function CreatePostMeme() {
   const [image, setImage] = useState(IconAdd);
   return (
     <div className="w-full bg-neutral-100 h-screen">
