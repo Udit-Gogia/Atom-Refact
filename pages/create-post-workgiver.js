@@ -246,7 +246,9 @@ export default function CreatePostWorkgiver({ workProfile }) {
           {/* resume section ends */}
           {/* portfolio/linkedin url starts */}
           <div>
-            <h1 className="text-lg mb-1">company's website link (optional)</h1>
+            <h1 className="text-lg mb-1">
+              company&apos;s website link (optional)
+            </h1>
 
             <input
               type="text"
