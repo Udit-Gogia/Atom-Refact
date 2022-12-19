@@ -45,7 +45,7 @@ export default function SuggestAFeature() {
         <TextAreaComponent
           Name={"contactUsDescription"}
           value={description}
-          stateMng={setDescription}
+          stateMng={(e) => setDescription(e.target.value)}
           placeholder={
             "please let us know if you have any ideas to improve the atom community"
           }

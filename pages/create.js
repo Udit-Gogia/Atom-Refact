@@ -6,6 +6,7 @@ import { alertUser } from "../components/Modals";
 
 export default function Create() {
   const [isLoggedin, setIsLoggedin] = useState();
+
   useEffect(() => {
     var { isAuth } = getUserDataObject();
     setIsLoggedin(isAuth);
@@ -38,10 +39,10 @@ export default function Create() {
   ];
 
   return (
-    <div className="flex bg-neutral-100 w-screen h-screen">
+    <div className="flex bg-neutral-100 w-screen min-h-screen h-max ">
       <Sidebar selectedOption={2} />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full p-2 md:p-8 h-1/2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full md:p-8 h-1/2">
         {createPostDetails.map((createPost, index) => {
           return (
             <Link
@@ -52,7 +53,7 @@ export default function Create() {
               }}
               key={index}
               href={!isLoggedin ? "/create" : createPost.redirect}
-              className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-lg md:text-xl text-center"
+              className="flex flex-col  bg-white p-4 rounded-md border-t-8 hover:border-primaryBlack items-center justify-center hover:shadow-xl font-semibold tracking-wide text-lg md:text-xl text-center md:h-[15rem]"
             >
               {createPost.label}
             </Link>

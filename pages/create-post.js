@@ -22,7 +22,7 @@ export default function CreatePost() {
         <TextAreaComponent
           Name={"createPostDescription"}
           value={description}
-          stateMng={setDescription}
+          stateMng={(e) => setDescription(e.target.value)}
           placeholder={"What's on your mind?"}
         />
         <div className="md:w-1/3">
@@ -49,7 +49,6 @@ export default function CreatePost() {
                 tag,
               });
 
-              console.log(res);
               if (res?.status) {
                 setDescription("");
                 setImage(IconAdd);

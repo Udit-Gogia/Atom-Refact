@@ -1,13 +1,20 @@
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/high-res.css";
+import { createPostWorkseeker } from "../components/postFunctions";
+import callApi from "../components/callApi";
+import Image from "next/image";
+import { useState } from "react";
+import {
+  FileComponent,
+  TextAreaComponent,
+  TagsComponent,
+} from "../components/inputs";
 import {
   IconConsultant,
   IconFullTime,
   IconFreelance,
   IconAdd,
 } from "../assets/images";
-import callApi from "../components/callApi";
-import Image from "next/image";
-import { useState } from "react";
-import { FileComponent, TagsComponent } from "../components/inputs";
 
 export async function getServerSideProps() {
   const { result: workProfile } = await callApi(
@@ -65,7 +72,7 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
     experience: "",
     city: "",
     media_url: "",
-    fileName: "",
+    tag: [],
     link_url: "",
     email: "",
     mobile: "",
@@ -73,7 +80,6 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
   });
 
   const [tagText, setTagText] = useState("");
-  const [tag, setTags] = useState([]);
 
   return (
     <div className="w-full bg-neutral-100 min-h-max">
@@ -84,50 +90,70 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
 
         <form
           id="workseeker"
-          onSubmit={(e) => {
+          onSubmit={async (e) => {
             e.preventDefault();
+
+            const res = await createPostWorkseeker(formData);
+
+            if (res?.status) {
+              return setFormData({
+                work_type: "",
+                work_profile: "",
+                experience: "",
+                city: "",
+                media_url: "",
+                tag: [],
+                link_url: "",
+                email: "",
+                mobile: "",
+                whatsapp: "",
+                description: "",
+              });
+            }
           }}
           method="post"
           className="flex flex-col gap-6"
         >
           {/* work_type starts */}
-          <div className="grid grid-cols-2 grid-rows-2 gap-4">
-            {jobRoles?.map((job, index) => {
-              return (
-                <div key={index}>
-                  <label>
-                    <input
-                      type="radio"
-                      value={job.jobName}
-                      onClick={(e) =>
-                        setFormData({
-                          ...formData,
-                          work_type: `${e.target.value}`,
-                        })
-                      }
-                      className="opacity-0 basis-1/2 peer"
-                      name="job"
-                      required
-                    />
-                    <div className="flex flex-col items-center basis-1/2 mx-auto peer-checked:font-bold w-full border-2 peer-checked:border-[#191919] rounded-md py-2">
-                      <Image
-                        src={job.jobImage}
-                        width="50"
-                        height="50"
-                        alt={job.jobName}
+          <div className="flex flex-col gap-2">
+            <h1 className="text-lg ">what work type are you looking for?</h1>
+            <div className="grid grid-cols-2 grid-rows-2 gap-4">
+              {jobRoles?.map((job, index) => {
+                return (
+                  <div key={index}>
+                    <label>
+                      <input
+                        type="radio"
+                        value={job.jobName}
+                        onClick={(e) =>
+                          setFormData({
+                            ...formData,
+                            work_type: `${e.target.value}`,
+                          })
+                        }
+                        className="hidden basis-1/2 peer"
+                        name="job"
+                        required
                       />
-                      <p>{job.jobName}</p>
-                    </div>
-                  </label>
-                </div>
-              );
-            })}
+                      <div className="flex flex-col items-center basis-1/2 mx-auto peer-checked:font-bold w-full border-2 peer-checked:border-[#191919] rounded-md py-2">
+                        <Image
+                          src={job.jobImage}
+                          width="50"
+                          height="50"
+                          alt={job.jobName}
+                        />
+                        <p>{job.jobName}</p>
+                      </div>
+                    </label>
+                  </div>
+                );
+              })}
+            </div>
           </div>
           {/* work_type ends */}
-
           {/* work_profile starts */}
           <div>
-            <h1 className="roboto-reg text-lg mb-1">select work profiles</h1>
+            <h1 className=" text-lg mb-1">select work profiles</h1>
             <input
               type="text"
               list="work"
@@ -148,7 +174,6 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
             </datalist>
           </div>
           {/* work_profile ends */}
-
           {/* experience starts */}
           <div>
             <h1 className="roboto-reg text-lg mb-1">select your experience</h1>
@@ -159,7 +184,7 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
                     <label className="flex w-full jusitfy-center place-content-center">
                       <input
                         type="radio"
-                        value={formData.experience}
+                        value={exp}
                         onChange={(e) =>
                           setFormData({
                             ...formData,
@@ -180,7 +205,6 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
             </div>
           </div>
           {/* experience ends */}
-
           {/* location preference starts */}
           <div>
             <h1 className="text-lg mb-1">select preferred city to work</h1>
@@ -202,23 +226,118 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
             </datalist>
           </div>
           {/* location preference ends */}
-
           {/* skills section starts */}
           <TagsComponent
             heading={"Enter your major skills"}
-            tag={tag}
+            tag={formData.tag}
+            setTags={(tag) => setFormData({ ...formData, tag: [...tag] })}
             tagText={tagText}
             setTagText={setTagText}
-            setTags={setTags}
           />
           {/* skills section ends */}
-
           {/* resume section starts */}
-          <div className="md:w-1/3 flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
             <h1 className="text-lg mb-1">upload your resume (optional) </h1>
-            <FileComponent accept={".pdf"} file={IconAdd} />
+            <section className="md:w-1/3 ">
+              <FileComponent
+                accept={".pdf"}
+                file={IconAdd}
+                setFile={(awsUrl) =>
+                  setFormData({ ...formData, media_url: `${awsUrl}` })
+                }
+              />
+            </section>
           </div>
           {/* resume section ends */}
+          {/* portfolio/linkedin url starts */}
+          <div>
+            <h1 className="text-lg mb-1">
+              add a link to your portfolio/linkedin (optional)
+            </h1>
+
+            <input
+              type="text"
+              className="px-4 py-2 border-2 rounded-lg w-full"
+              onChange={(e) =>
+                setFormData({ ...formData, link_url: `${e.target.value}` })
+              }
+              value={formData.link_url}
+              required
+            />
+          </div>
+          {/* portfolio/linkedin url ends */}
+          <div className="flex flex-col gap-2">
+            <h1 className=" text-lg">add your contact details (optional)</h1>
+
+            {/* email starts */}
+            <h1 className="">email</h1>
+            <input
+              type="email"
+              className="px-4 py-2 border-2 rounded-lg w-full"
+              value={formData.email}
+              name="email"
+              label={"email"}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+            {/* <input
+              type="email"
+              name="email"
+              className="w-full border-2 rounded-md px-4 py-2 my-2 focus:border-[#191919]"
+              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+            ></input> */}
+
+            {/* email ends */}
+
+            {/* phone number input starts */}
+            <div className="flex flex-col gap-2">
+              <h1 className="mb-1">mobile number </h1>
+
+              <PhoneInput
+                enableSearch={true}
+                inputStyle={{
+                  width: "100%",
+                  border: "2px solid #e5e7eb",
+                  borderRadius: "0.375rem",
+                }}
+                country={"in"}
+                value={formData.mobile}
+                onChange={(mobileNumber) =>
+                  setFormData({ ...formData, mobile: `${mobileNumber}` })
+                }
+              />
+            </div>
+            {/* phone number input ends */}
+
+            {/* whatsapp input starts */}
+            <div className="flex flex-col gap-2">
+              <h1 className="mb-1">whatsapp number</h1>
+
+              <PhoneInput
+                enableSearch={true}
+                inputStyle={{ width: "100%" }}
+                country={"in"}
+                value={formData.whatsapp}
+                onChange={(whatsappNumber) =>
+                  setFormData({ ...formData, whatsapp: `${whatsappNumber}` })
+                }
+              />
+            </div>
+            {/* whatsapp input ends */}
+          </div>
+
+          {/* description starts */}
+          <TextAreaComponent
+            stateMng={(e) =>
+              setFormData({ ...formData, description: `${e.target.value}` })
+            }
+            Name="about self"
+            value={formData.description}
+            label="write something about yourself"
+          />
+          {/* description ends */}
 
           {/* button starts */}
           <div className="flex justify-around items-center gap-6">
@@ -226,8 +345,9 @@ export default function CreatePostWorkseeker({ serviceType, workProfile }) {
               cancel
             </button>
             <button
+              type="submit"
+              form="workseeker"
               className="lg:text-lg sm:text-md tracking-wide bg-[#191919] md:px-8 py-2 basis-1/2  lg:border-2 border-[#191919] rounded-lg text-center text-white hover:bg-[#404040] "
-              onClick={() => console.log(formData)}
             >
               send message
             </button>

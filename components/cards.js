@@ -98,8 +98,10 @@ export function SidebarCard({
   return (
     <Link
       href={sidebarSection.href}
-      className={`flex items-center py-4 px-4 md:px-8 w-full rounded-md hover:underline  ${
-        index == isActiveIndex ? "bg-white" : "bg-neutral-100"
+      className={`flex items-center py-4 px-4 md:px-8 w-full ${
+        index == isActiveIndex
+          ? "bg-white rounded-r-full"
+          : "bg-neutral-100 hover:bg-neutral-200 hover:rounded-r-full"
       }`}
       onClick={() => setActiveOption(index)}
     >

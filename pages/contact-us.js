@@ -47,7 +47,8 @@ export default function ContactUs() {
         <TextAreaComponent
           Name={"contactUsDescription"}
           value={description}
-          stateMng={setDescription}
+          stateMng={(e) => setDescription(e.target.value)}
+          // stateMng={setDescription}
           placeholder={"please let us know how can we help you"}
         />
         <div

@@ -1,5 +1,6 @@
 import callApi from "./callApi";
 import { getUserDataObject, validateRes } from "./authFunctions";
+import { checkPresence } from "./cards";
 
 export const createPostFunction = async (dataObject) => {
   const token = getUserDataObject("token");
@@ -11,6 +12,60 @@ export const createPostFunction = async (dataObject) => {
   const { response, result } = await callApi(
     "POST",
     "private/all/create-post",
+    token,
+    JSON.stringify(dataObject),
+    "post created successfully"
+  );
+
+  return validateRes(response, result);
+};
+
+export const createPostWorkseeker = async (dataObject) => {
+  const token = getUserDataObject("token");
+
+  Object.keys(dataObject).forEach(
+    (key) => !checkPresence(dataObject[key]) && delete dataObject[key]
+  );
+
+  const { response, result } = await callApi(
+    "POST",
+    "private/all/create-post-workseeker",
+    token,
+    JSON.stringify(dataObject),
+    "post created successfully"
+  );
+
+  return validateRes(response, result);
+};
+
+export const createPostWorkgiver = async (dataObject) => {
+  ``;
+  const token = getUserDataObject("token");
+
+  Object.keys(dataObject).forEach(
+    (key) => !checkPresence(dataObject[key]) && delete dataObject[key]
+  );
+
+  const { response, result } = await callApi(
+    "POST",
+    "private/all/create-post-workgiver",
+    token,
+    JSON.stringify(dataObject),
+    "post created successfully"
+  );
+
+  return validateRes(response, result);
+};
+export const createPostService = async (dataObject) => {
+  const token = getUserDataObject("token");
+
+  Object.keys(dataObject).forEach(
+    (key) => !checkPresence(dataObject[key]) && delete dataObject[key]
+  );
+
+  const { response, result } = await callApi(
+    "POST",
+    "private/all/create-post-service",
     token,
     JSON.stringify(dataObject),
     "post created successfully"

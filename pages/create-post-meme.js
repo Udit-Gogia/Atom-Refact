@@ -7,7 +7,7 @@ import { alertUser } from "../components/Modals";
 export default function CreatePostMeme() {
   const [image, setImage] = useState(IconAdd);
   return (
-    <div className="w-full bg-neutral-100 h-screen">
+    <div className="w-full bg-neutral-100 min-h-screen h-max">
       <div className="md:w-1/2 flex flex-col gap-6 border-2 rounded-lg p-8 mx-auto bg-white my-4">
         <p className="text-xl tracking-wide font-semibold pb-2  w-full border-b-2">
           share a meme
@@ -31,7 +31,6 @@ export default function CreatePostMeme() {
                   tag: ["meme"],
                 });
 
-                console.log(res);
                 if (res?.status) {
                   setImage(IconAdd);
                 }

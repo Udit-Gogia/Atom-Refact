@@ -23,7 +23,6 @@ export default function MyLoginInfo() {
       const result = await getUserDataFromApi();
       const { username } = result;
       setCurrUsername(username);
-      console.log(result);
     }
 
     fetchUserData();

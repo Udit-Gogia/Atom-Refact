@@ -7,7 +7,7 @@ import { checkPresence } from "./cards";
 export const InputComponent = ({ label, Name, value, stateMng, type }) => {
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={Name} className="font-semibold text-lg tracking-wide">
+      <label htmlFor={Name} className="font-semibold text-lg tracking-wide ">
         {label}
       </label>
       <input
@@ -33,7 +33,7 @@ export const TextAreaComponent = ({
   return (
     <div className="flex flex-col">
       {checkPresence(label) && (
-        <label htmlFor={Name} className="font-semibold my-2">
+        <label htmlFor={Name} className="font-semibold my-2 text-lg">
           {label}
         </label>
       )}
@@ -43,7 +43,7 @@ export const TextAreaComponent = ({
         placeholder={placeholder}
         value={value}
         className="p-2 w-full rounded-lg border-2 resize-none focus:outline-primaryBlack"
-        onChange={(e) => stateMng(e.target.value)}
+        onChange={stateMng}
       />
     </div>
   );

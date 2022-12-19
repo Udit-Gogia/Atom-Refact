@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter();
   const [activeOption, setActiveOption] = useState(0);
   return (
-    <div className="flex bg-neutral-100 w-full h-screen">
+    <div className="flex bg-neutral-100 w-full min-h-screen ">
       <Sidebar />
 
       <div className="w-full flex flex-col ">
